@@ -21,19 +21,20 @@ export function ThemeProvider({children}) {
     darkOrange: '#E76F51',
     red: '#e63946',
     white: '#f1faee',
-    black: '#011627'
+    black: '#011627',
+    pink: '#ff0a78'
   }
 
   const darkColors = {
-    backgroundColor: colors.grey,
+    backgroundColor: colors.black,
     primary: colors.white,
-    secondary: colors.yellow
+    secondary: colors.pink
   }
 
   const lightColors = {
     backgroundColor: colors.white,
     primary: colors.black,
-    secondary: colors.yellow
+    secondary: colors.darkOrange
   }
 
   let themeColors = colors;
