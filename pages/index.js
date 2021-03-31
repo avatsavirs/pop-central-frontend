@@ -38,7 +38,10 @@ export default function Home() {
     return data.popularMovies;
   });
   return (
-    <div>
+    <div css={{
+      fontSize: '1.25rem',
+      backgroundColor: 'yellow'
+    }}>
       {JSON.stringify(popularMovies)}
     </div>
   )
