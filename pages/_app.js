@@ -1,3 +1,4 @@
+import Layout from 'components/Layout';
 import {useRef} from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {Hydrate} from 'react-query/hydration';
@@ -14,7 +15,9 @@ function MyApp({Component, pageProps}) {
       <Hydrate state={pageProps.dehydrateState}>
         <ThemeProvider>
           <GlobalStyles />
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </ThemeProvider>
       </Hydrate>
     </QueryClientProvider>

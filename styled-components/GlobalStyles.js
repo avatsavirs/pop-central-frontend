@@ -16,6 +16,11 @@ export default function GlobalStyles() {
           transition: `background-color ease-in-out 0.3s, color ease-in-out 0.3s`,
           fontSize: theme.typography.baseFontSize,
         },
+        '#__next': {
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+        },
         h1: {
           fontSize: '4.5rem'
         },
