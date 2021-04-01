@@ -33,11 +33,15 @@ export const StyledLink = styled.a({
     transition: 'transform 0.3s ease-out',
     transformOrigin: '0'
   },
-  ':hover': {
+  ':hover, :focus': {
     '::after': {
       transform: 'scaleX(1)'
     }
-  }
+  },
+  // When StyledLink is used as button
+  backgroundColor: 'transparent',
+  border: 'none',
+  fontFamily: 'serif',
 });
 
 export const Card = styled.div({
@@ -111,9 +115,4 @@ export const CardLinks = styled.div({
   display: 'flex',
   justifyContent: 'space-between',
   paddingTop: '0.5rem',
-  button: {
-    border: 'none',
-    background: 'transparent',
-    padding: '0.25rem'
-  }
 })
