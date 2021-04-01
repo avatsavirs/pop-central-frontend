@@ -1,5 +1,6 @@
 import {ThemeProvider as EmotionThemeProvider} from '@emotion/react'
 import {createContext, useContext, useState} from 'react'
+import colors from 'styled-components/colors'
 
 const currentThemeContext = createContext();
 
@@ -13,18 +14,6 @@ export function ThemeProvider({children}) {
 
   const isDarkTheme = currentTheme === 'dark';
 
-  const colors = {
-    grey: '#264653',
-    green: '#2A9D8F',
-    yellow: '#E9C46A',
-    orange: '#F4A261',
-    darkOrange: '#E76F51',
-    red: '#e63946',
-    white: '#f1faee',
-    black: '#011627',
-    pink: '#ff0a78'
-  }
-
   const darkColors = {
     backgroundColor: colors.black,
     primary: colors.white,
@@ -37,18 +26,8 @@ export function ThemeProvider({children}) {
     secondary: colors.darkOrange
   }
 
-  let themeColors = colors;
-  if (isDarkTheme) {
-    themeColors = {...themeColors, ...darkColors}
-  } else {
-    themeColors = {...themeColors, ...lightColors}
-  }
-
   const theme = {
-    colors: {
-      ...colors,
-      ...themeColors
-    },
+    colors: isDarkTheme ? lightColors : darkColors,
     typography: {
       headingWeight: 400,
       bodyWeight: 400,
