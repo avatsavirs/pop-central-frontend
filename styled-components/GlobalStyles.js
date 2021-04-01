@@ -14,7 +14,7 @@ export default function GlobalStyles() {
           backgroundColor: theme.colors.backgroundColor,
           color: theme.colors.primary,
           transition: `background-color ease-in-out 0.3s, color ease-in-out 0.3s`,
-          fontSize: theme.typography.baseFontSize
+          fontSize: theme.typography.baseFontSize,
         },
         h1: {
           fontSize: '4.5rem'
@@ -29,16 +29,24 @@ export default function GlobalStyles() {
           fontSize: '3rem'
         },
         h5: {
-          fontSize: '2.5rem'
+          fontSize: '2.5rem',
+          lineHeight: '2.5rem'
         },
         h6: {
           fontSize: '2rem'
         },
         p: {
-          fontSize: '2rem'
+          fontSize: '1.8rem',
+          lineHeight: '2.25rem'
         },
         small: {
           fontSize: '1.5rem'
+        },
+        a: {
+          fontSize: '1.8rem'
+        },
+        button: {
+          fontSize: '1.8rem'
         }
       }}
     />
