@@ -11,6 +11,7 @@
     "@emotion/babel-plugin": "^11.2.0",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
+    "@reach/menu-button": "^0.14.0",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
     "next": "10.1.2",

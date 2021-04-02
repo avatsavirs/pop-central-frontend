@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -33,7 +33,7 @@ html {
   --black: #41403e;
   --white: white;
   --pink: #fc0976;
-  --white-dark: rgba(0, 0, 0, 0.03);
+  --white-dark: rgba(0, 0, 0, 0.3);
   --light-dark: rgba(0, 0, 0, 0.7);
   --main-background: var(--white);
   --main-background-light: var(--white);
@@ -50,6 +50,8 @@ html {
   --button-text-color: var(--white);
   --primary-link: var(--pink);
   --text-fade-color: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+  --border-color: black;
+  --focus-background: #eee;
 }
 
 .dark {
@@ -71,7 +73,7 @@ html {
   --warning-dark: #746a15;
   --danger-dark: #a00800;
   --muted-dark: #313538;
-  --black: #41403e;
+  --black: #212121;
   --lightBlack: #c1c0bd;
   --white: white;
   --white-dark: rgba(255, 255, 255, 0.03);
@@ -88,6 +90,8 @@ html {
   --shadow-color-hover: rgba(0, 0, 0, 0.3);
   --primary-inverse: #41403e;
   --text-fade-color: linear-gradient(to right, rgba(65, 64, 62, 0), rgba(65, 64, 62, 1) 50%);
+  --focus-background: #333;
+  --border-color: #373737;
 }
 
 body {

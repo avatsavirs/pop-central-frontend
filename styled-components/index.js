@@ -49,7 +49,7 @@ export const Card = styled.div({
   width: '34.2rem',
   height: '85rem',
   transition: 'all 235ms ease 0s',
-  borderColor: 'var(--primary)',
+  borderColor: 'var(--border-color)',
   backfaceVisibility: 'hidden',
   borderStyle: 'solid',
   borderWidth: '1px',
