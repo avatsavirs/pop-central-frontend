@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import colors from 'styled-components/colors'
 
 export const Button = styled.button({
   display: 'block',
@@ -8,10 +7,10 @@ export const Button = styled.button({
   transition: 'all 250ms ease-out',
   cursor: 'pointer',
   borderRadius: '5px',
-  backgroundColor: colors.pink,
-  color: colors.white,
+  backgroundColor: 'var(--button-background)',
+  color: 'var(--button-text-color)',
   ':hover': {
-    boxShadow: '0 15px 10px -10px rgba(31, 31, 31, 0.5)'
+    boxShadow: '15px 28px 25px -18px rgba(0, 0, 0, 0.2)'
   }
 },
   ({size}) => ({
@@ -24,16 +23,17 @@ export const StyledLink = styled.a({
   textDecoration: 'none',
   cursor: 'pointer',
   display: 'inline-block',
-  color: colors.pink,
+  color: 'var(--primary-link)',
   '::after': {
     content: "''",
     display: 'block',
-    borderTop: `2px solid ${colors.green}`,
+    borderTop: `2px solid var(--success)`,
     transform: 'scaleX(0)',
     transition: 'transform 0.3s ease-out',
     transformOrigin: '0'
   },
   ':hover, :focus': {
+    outline: 'none',
     '::after': {
       transform: 'scaleX(1)'
     }
@@ -41,24 +41,25 @@ export const StyledLink = styled.a({
   // When StyledLink is used as button
   backgroundColor: 'transparent',
   border: 'none',
-  fontFamily: 'serif',
+  fontFamily: 'Roboto, sans-serif',
+  fontSize: '1.8rem'
 });
 
 export const Card = styled.div({
   width: '34.2rem',
   height: '85rem',
   transition: 'all 235ms ease 0s',
-  borderColor: colors.darkGrey,
+  borderColor: 'var(--primary)',
   backfaceVisibility: 'hidden',
   borderStyle: 'solid',
-  borderWidth: '2px',
+  borderWidth: '1px',
   display: 'flex',
   flexDirection: 'column',
   position: 'relative',
   willChange: 'transform',
-  boxShadow: '2px 8px 8px -5px rgba(0, 0, 0, 0.3)',
+  boxShadow: '2px 8px 8px -5px rgba(34, 34, 34, 0.3)',
   ':hover': {
-    boxShadow: '15px 28px 25px -18px rgba(0, 0, 0, 0.2)',
+    boxShadow: '15px 28px 25px -18px rgba(34, 34, 34, 0.2)',
   }
 })
 
@@ -74,41 +75,35 @@ export const CardBody = styled.div({
 })
 
 export const CardTitle = styled.div({
+  lineHeight: '2.5rem',
   height: '5rem',
   overflowY: 'hidden',
   position: 'relative',
-  ':after': {
-    content: "''",
-    position: 'absolute',
-    textAlign: 'right',
-    bottom: '0',
-    right: '0',
-    width: '30%',
-    height: '2.5rem',
-    background: 'linear-gradient(to right, rgba(241, 250, 238, 0), rgba(241, 250, 238, 1) 50%)'
-  },
+  // ':after': {
+  //   content: "''",
+  //   position: 'absolute',
+  //   textAlign: 'right',
+  //   bottom: '0',
+  //   right: '0',
+  //   width: '30%',
+  //   height: '2.5rem',
+  //   background: 'var(--text-fade-color)',
+  //   transition: 'background 235ms ease-out'
+  // },
   'h1, h2, h3, h4, h5, h6': {
-    width: '100%'
+    height: '100%'
   }
 });
 
 export const CardText = styled.div({
-  height: '20.25rem',
-  overflowY: 'hidden',
+  lineHeight: '2.2rem',
+  height: '22rem',
+  width: '100%',
+  overflow: 'hidden',
   position: 'relative',
   p: {
     height: '100%'
   },
-  ':after': {
-    content: "''",
-    position: 'absolute',
-    textAlign: 'right',
-    bottom: '0',
-    right: '0',
-    width: '30%',
-    height: '2.5rem',
-    background: 'linear-gradient(to right, rgba(241, 250, 238, 0), rgba(241, 250, 238, 1) 50%)'
-  }
 });
 
 export const CardLinks = styled.div({
