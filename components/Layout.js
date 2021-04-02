@@ -6,7 +6,9 @@ export default function Layout({children}) {
     <>
       <Nav />
       <main css={{
-        flexGrow: 1
+        flexGrow: 1,
+        display: 'flex',
+        justifyContent: 'center'
       }}>
         {children}
       </main>
