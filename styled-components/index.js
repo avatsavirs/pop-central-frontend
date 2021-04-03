@@ -111,3 +111,12 @@ export const CardLinks = styled.div({
   justifyContent: 'space-between',
   paddingTop: '0.5rem',
 })
+
+export const Overlay = styled.div({
+  backgroundColor: 'rgba(0, 0, 0, 0.85)',
+  height: '100%',
+  width: '100%',
+  position: 'absolute',
+  top: 0,
+  left: 0,
+})

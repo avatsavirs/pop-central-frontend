@@ -16,7 +16,7 @@ export default function DisplayCard({title, image, text, link, id}) {
         <CardText><p>{text}</p></CardText>
         <CardLinks>
           <StyledLink as="button"> Add to List </StyledLink>
-          <Link href="#" passHref><StyledLink> Read More </StyledLink></Link>
+          <Link href={link} passHref><StyledLink> Read More </StyledLink></Link>
         </CardLinks>
       </CardBody>
     </Card>

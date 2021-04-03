@@ -4,11 +4,12 @@ import {dehydrate} from 'react-query/hydration';
 import {getPopularMovies} from 'data/movies'
 import {getPopularTv} from 'data/tv'
 import PopularTv from 'components/PopularTv';
+import Head from 'next/head'
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery('popularMovies', getPopularMovies)
-  await queryClient.prefetchQuery('popularTv', getPopularTv)
+  await queryClient.prefetchQuery('movies', getPopularMovies)
+  await queryClient.prefetchQuery('tv', getPopularTv)
   return {
     props: {
       dehydrateState: dehydrate(queryClient)
@@ -18,12 +19,17 @@ export async function getStaticProps() {
 
 export default function Home() {
   return (
-    <div css={{
-      flexBasis: 'var(--content-width)',
-      padding: '3rem 0'
-    }}>
-      <PopularMovies />
-      <PopularTv />
-    </div>
+    <>
+      <Head>
+        <title> Welcome | Pop Central </title>
+      </Head>
+      <div css={{
+        flexBasis: 'var(--content-width)',
+        padding: '3rem 0'
+      }}>
+        <PopularMovies />
+        <PopularTv />
+      </div>
+    </>
   )
 }

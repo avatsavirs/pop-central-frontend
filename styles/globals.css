@@ -49,6 +49,15 @@ html {
   --shadow-color-hover: rgba(0, 0, 0, 0.3);
   /* Containers */
   --content-width: 130rem;
+  /* Typography */ 
+  --h1: 6.4rem;
+  --h2: 4.8rem;
+  --h3: 3.2rem;
+  --h4: 2.4rem;
+  --h5: 1.6rem;
+  --h6: 1.28rem;
+  --p: 1.8rem;
+  --small: 1.28rem;
 }
 
 [data-theme="dark"] {

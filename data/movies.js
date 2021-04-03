@@ -21,3 +21,31 @@ export async function getPopularMovies() {
     return []
   }
 }
+
+export async function getMovieById(movieId) {
+  try {
+    const data = await request(gql`
+      query {
+        movie(movieId: ${movieId}) {
+          id
+          title 
+          overview
+          tagline
+          backdropImage
+          poster(imgSize: M)
+          rating
+          releaseDate
+          directors {
+            name
+          }
+          genres
+          runtime
+        }
+      }
+    `)
+    return data.movie;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}

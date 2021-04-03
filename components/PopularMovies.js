@@ -3,7 +3,7 @@ import DisplayCard from 'components/DisplayCard';
 import {getPopularMovies} from 'data/movies';
 
 export default function PopularMovies() {
-  const {data: popularMovies} = useQuery('popularMovies', getPopularMovies);
+  const {data: popularMovies} = useQuery('movies', getPopularMovies);
   return (
 
     <section aria-label="popular movies">
@@ -16,7 +16,7 @@ export default function PopularMovies() {
         gap: '3rem',
       }}>
         {
-          popularMovies?.map(movie => <DisplayCard key={movie.id} title={movie.title} id={movie.id} text={movie.overview} image={movie.poster} />)
+          popularMovies?.map(movie => <DisplayCard key={movie.id} title={movie.title} id={movie.id} text={movie.overview} image={movie.poster} link={`movies/${movie.id}`} />)
         }
       </div>
     </section>

@@ -3,7 +3,7 @@ import {useQuery} from 'react-query';
 import DisplayCard from 'components/DisplayCard'
 
 export default function PopularTv() {
-  const {data: popularTv} = useQuery('popularTv', getPopularTv);
+  const {data: popularTv} = useQuery('tv', getPopularTv);
   return (
     <section aria-label="popular tv">
       <h2> Tv </h2>
@@ -15,7 +15,7 @@ export default function PopularTv() {
         gap: '3rem',
       }}>
         {
-          popularTv?.map(tv => <DisplayCard key={tv.id} title={tv.title} id={tv.id} text={tv.overview} image={tv.poster} />)
+          popularTv?.map(tv => <DisplayCard key={tv.id} title={tv.title} id={tv.id} text={tv.overview} image={tv.poster} link="#" />)
         }
       </div>
     </section>
