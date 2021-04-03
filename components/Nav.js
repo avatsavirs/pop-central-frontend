@@ -17,9 +17,12 @@ export default function Nav() {
           fontSize: '6.4rem',
           fontWeight: '700',
           textDecoration: 'none',
-          color: 'var(--primary-text)'
+          color: 'var(--primary-text)',
+          span: {
+            color: 'var(--brand)'
+          }
         }}>
-          Pop Central
+          <span>P</span>op <span>C</span>entral
         </a>
       </Link>
       <UserMenu />

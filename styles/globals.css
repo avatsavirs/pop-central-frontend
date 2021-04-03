@@ -30,31 +30,28 @@ html {
   --warning-dark: #746a15;
   --danger-dark: black;
   --muted-dark: #313538;
-  --black: #41403e;
-  --white: white;
-  --pink: #fc0976;
-  --white-dark: rgba(0, 0, 0, 0.3);
-  --light-dark: rgba(0, 0, 0, 0.7);
-  --main-background: var(--white);
-  --main-background-light: var(--white);
+  --primary-background: #fff;
+  --secondary-background: #eee;
+  --primary-inverse: #fff;
+  --brand: #fc0976;
+  /* Colors Usage */
   --primary-text: var(--primary);
   --secondary-text: var(--secondary);
   --success-text: var(--success);
   --warning-text: var(--warning);
   --danger-text: var(--danger);
   --muted-text: var(--muted);
+  --primary-link: var(--brand);
+  --button-background: var(--brand);
+  --button-text-color: #fff;
+  --border-color: var(--primary-dark);
   --shadow-color-regular: rgba(0, 0, 0, 0.2);
   --shadow-color-hover: rgba(0, 0, 0, 0.3);
-  --primary-inverse: #fff;
-  --button-background: var(--pink);
-  --button-text-color: var(--white);
-  --primary-link: var(--pink);
-  --text-fade-color: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
-  --border-color: black;
-  --focus-background: #eee;
+  /* Containers */
+  --content-width: 130rem;
 }
 
-.dark {
+[data-theme="dark"] {
   --primary: #fff;
   --secondary: #0071de;
   --success: #189418;
@@ -67,36 +64,20 @@ html {
   --warning-light: #e1d35b;
   --danger-light: #ffa4a0;
   --muted-light: #949ba2;
-  --primary-dark: gray;
+  --primary-dark: #373737;
   --secondary-dark: black;
   --success-dark: #031003;
   --warning-dark: #746a15;
   --danger-dark: #a00800;
   --muted-dark: #313538;
-  --black: #212121;
-  --lightBlack: #c1c0bd;
-  --white: white;
-  --white-dark: rgba(255, 255, 255, 0.03);
-  --light-dark: rgba(255, 255, 255, 0.7);
-  --main-background: var(--black);
-  --main-background-light: var(--lightBlack);
-  --primary-text: var(--primary);
-  --secondary-text: var(--secondary);
-  --success-text: var(--success);
-  --warning-text: var(--warning);
-  --danger-text: var(--danger);
-  --muted-text: var(--muted);
-  --shadow-color-regular: rgba(0, 0, 0, 0.2);
-  --shadow-color-hover: rgba(0, 0, 0, 0.3);
+  --primary-background: #212121;
+  --secondary-background: #333;
   --primary-inverse: #41403e;
-  --text-fade-color: linear-gradient(to right, rgba(65, 64, 62, 0), rgba(65, 64, 62, 1) 50%);
-  --focus-background: #333;
-  --border-color: #373737;
 }
 
 body {
   color: var(--primary-text);
-  background-color: var(--main-background);
+  background-color: var(--primary-background);
   transition: background-color 235ms ease-out, color 235ms ease-out;
   font-family: 'Roboto', sans-serif;
 }
