@@ -28,7 +28,6 @@ export default function useTheme() {
     if (userPreference) {
       setIsDarkTheme(userPreference === 'dark');
     } else {
-      console.log('getting system pref')
       const systemPreference = getSystemPreference();
       setIsDarkTheme(systemPreference === 'dark');
     }

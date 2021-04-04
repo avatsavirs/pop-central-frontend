@@ -61,12 +61,16 @@ export const Card = styled.div({
   ':hover': {
     boxShadow: '15px 28px 25px -18px rgba(34, 34, 34, 0.2)',
   }
-})
+}, ({width, height}) => ({
+  width, height
+}))
 
 export const CardImage = styled.div({
   flexBasis: '60%',
   position: 'relative'
-});
+}, ({portion}) => ({
+  flexBasis: portion
+}));
 
 export const CardBody = styled.div({
   flexBasis: '40%',
