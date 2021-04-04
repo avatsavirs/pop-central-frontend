@@ -20,26 +20,34 @@ export default function UserMenu() {
 }
 
 const StyledMenuButton = styled(MenuButton)({
-  width: '5rem',
-  height: '5rem',
-  borderRadius: '50%',
-  background: 'transparent',
-  position: 'relative',
-  border: 'none',
-  overflow: 'hidden',
-  cursor: 'pointer'
+  background:
+    "url(https://lh3.googleusercontent.com/ogw/ADGmqu_-_n4SCuPnCDVCjLGDkbqNENLLjdZiCOz3q19_=s48-c-mo)",
+  width: "5rem",
+  height: "5rem",
+  borderRadius: "50%",
+  position: "relative",
+  border: "none",
+  overflow: "hidden",
+  cursor: "pointer",
+  ":focus": {
+    outline: 'none',
+    boxShadow: "0 0 0 4px var(--outline-color)"
+  },
+  '&[aria-expanded="true"]': {
+    boxShadow: "0 0 0 4px var(--outline-color)"
+  }
 });
 
 const StyledMenuList = styled(MenuList)({
-  background: 'var(--primary-background)',
-  border: '1px solid var(--border-color)',
+  background: "var(--primary-background)",
+  border: "1px solid var(--border-color)"
 });
 
 const StyledMenuItem = styled(MenuItem)({
-  padding: '1rem 4rem',
-  fontSize: '1.8rem',
-  cursor: 'pointer',
-  ':hover, :focus': {
-    backgroundColor: 'var(--secondary-background)',
+  padding: "1rem 4rem",
+  fontSize: "1.8rem",
+  cursor: "pointer",
+  "&[data-reach-menu-item][data-selected]": {
+    background: "var(--secondary-background)"
   }
-})
+});

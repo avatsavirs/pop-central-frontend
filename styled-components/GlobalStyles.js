@@ -31,8 +31,6 @@ export default function GlobalStyles() {
           --warning-dark: #746a15;
           --danger-dark: black;
           --muted-dark: #313538;
-          --primary-background: #fff;
-          --secondary-background: #eee;
           --primary-inverse: #fff;
           --brand: #fc0976;
           /* Colors Usage */
@@ -42,12 +40,15 @@ export default function GlobalStyles() {
           --warning-text: var(--warning);
           --danger-text: var(--danger);
           --muted-text: var(--muted);
+          --primary-background: #fff;
+          --secondary-background: #eee;
           --primary-link: var(--brand);
           --button-background: var(--brand);
           --button-text-color: #fff;
           --border-color: var(--primary-dark);
           --shadow-color-regular: rgba(0, 0, 0, 0.2);
           --shadow-color-hover: rgba(0, 0, 0, 0.3);
+          --outline-color: #333;
           /* Containers */
           --content-width: 130rem;
           /* Typography */ 
