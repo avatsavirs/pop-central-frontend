@@ -40,6 +40,14 @@ export async function getMovieById(movieId) {
           }
           genres
           runtime
+          credits {
+            artist {
+              id
+              name
+              photo(imgSize:M)
+            }
+            role
+          }
         }
       }
     `)
