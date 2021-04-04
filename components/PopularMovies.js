@@ -16,7 +16,7 @@ export default function PopularMovies() {
         gap: '3rem',
       }}>
         {
-          popularMovies?.map(movie => <DisplayCard key={movie.id} title={movie.title} id={movie.id} text={movie.overview} image={movie.poster} link={`movies/${movie.id}`} />)
+          popularMovies?.map(movie => <DisplayCard key={movie.id} title={movie.title} id={movie.id} text={movie.overview} image={movie.poster} link={`/movies/${movie.id}`} />)
         }
       </div>
     </section>
