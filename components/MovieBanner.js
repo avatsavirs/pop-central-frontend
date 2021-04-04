@@ -1,10 +1,11 @@
 import {Overlay} from 'styled-components';
+import Image from 'next/image';
+
 export default function MovieBanner({image, children}) {
   return (
     <div css={{
       width: '100vw',
       height: '60rem',
-      backgroundImage: `url(${image})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       position: 'relative',
@@ -12,7 +13,8 @@ export default function MovieBanner({image, children}) {
       justifyContent: 'center',
     }}>
       <Overlay />
-      <div css={{flexBasis: 'var(--content-width)', position: 'relative', display: 'flex'}}>
+      <Image src={image} layout="fill" objectFit="cover" quality={1} />
+      <div css={{flexBasis: 'var(--content-width)', position: 'relative', display: 'flex', zIndex: 2}}>
         {children}
       </div>
     </div>

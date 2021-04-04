@@ -12,7 +12,7 @@ export default function MovieCast({cast}) {
       justifyContent: 'center',
     }}>
       {cast.map(person => (
-        <Card width="15rem" height="29rem">
+        <Card key={person.id} width="15rem" height="29rem">
           <CardImage portion="80%" >
             <Image src={person.photo || '/img/profile.png'} layout="fill" objectFit="cover" />
           </CardImage>
