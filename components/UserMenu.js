@@ -39,6 +39,8 @@ const StyledMenuButton = styled(MenuButton)({
 });
 
 const StyledMenuList = styled(MenuList)({
+  position: 'relative', // for zIndex to have effect
+  zIndex: '3', // to hover over the movie banner
   background: "var(--primary-background)",
   border: "1px solid var(--border-color)"
 });
