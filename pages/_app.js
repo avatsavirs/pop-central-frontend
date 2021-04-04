@@ -2,6 +2,7 @@ import Layout from 'components/Layout';
 import {useRef} from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {Hydrate} from 'react-query/hydration';
+import FontImports from 'styled-components/FontImports';
 import GlobalStyles from 'styled-components/GlobalStyles'
 
 function MyApp({Component, pageProps}) {
@@ -13,7 +14,8 @@ function MyApp({Component, pageProps}) {
     <QueryClientProvider client={queryClientRef.current}>
       <Hydrate state={pageProps.dehydrateState}>
         <Layout>
-          <GlobalStyles/>
+          <GlobalStyles />
+          <FontImports />
           <Component {...pageProps} />
         </Layout>
       </Hydrate>
