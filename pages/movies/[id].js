@@ -4,9 +4,9 @@ import Image from 'next/image';
 import {QueryClient, useQuery} from 'react-query';
 import {dehydrate} from 'react-query/hydration';
 import {useRouter} from 'next/router'
-import MovieBanner from 'components/MovieBanner'
-import MovieBannerContent from 'components/MovieBannerContent'
-import MovieBody from 'components/MovieBody';
+import Banner from 'components/DetailsPage/Banner'
+import BannerContent from 'components/DetailsPage/BannerContent'
+import PageBody from 'components/DetailsPage/PageBody';
 const {gql} = require('graphql-request');
 const {request} = require('utils');
 
@@ -49,11 +49,11 @@ export default function Movie({movieId}) {
       overflowX: 'hidden'
     }}>
       <Head> <title> {movie.title} | Pop Central </title> </Head>
-      <MovieBanner image={movie.backdropImage}>
+      <Banner image={movie.backdropImage}>
         <Poster image={movie.poster} />
-        <MovieBannerContent title={movie.title} summary={movie.overview} releaseDate={movie.releaseDate} rating={movie.rating} directors={movie.directors} tagline={movie.tagline} genres={movie.genres} runtime={movie.runtime} />
-      </MovieBanner>
-      <MovieBody cast={movie.credits} />
+        <BannerContent title={movie.title} summary={movie.overview} releaseDate={movie.releaseDate} rating={movie.rating} directors={movie.directors} tagline={movie.tagline} genres={movie.genres} runtime={movie.runtime} />
+      </Banner>
+      <PageBody cast={movie.credits} />
     </div>
   )
 }

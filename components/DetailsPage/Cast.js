@@ -2,7 +2,7 @@ import Image from 'next/image';
 import {CardImage} from 'styled-components';
 import {Card} from 'styled-components';
 
-export default function MovieCast({cast}) {
+export default function Cast({cast}) {
   cast = cast.map(c => ({role: c.role, ...c.artist})).slice(0, 10);
   return (
     <div css={{

@@ -1,4 +1,4 @@
-export default function MovieBannerContent({title, summary, releaseDate, directors, rating, tagline, genres, runtime}) {
+export default function BannerContent({title, summary, releaseDate, directors, rating, tagline, genres, runtime}) {
   const releaseYear = releaseDate.match(/^(\d{4})-/)[1];
   runtime = (Math.floor(runtime / 60)) + 'h ' + (runtime % 60) + 'min';
   return (

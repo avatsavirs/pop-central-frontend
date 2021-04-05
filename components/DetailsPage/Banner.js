@@ -1,7 +1,7 @@
 import {Overlay} from 'styled-components';
 import Image from 'next/image';
 
-export default function MovieBanner({image, children}) {
+export default function Banner({image, children}) {
   return (
     <div css={{
       width: '100vw',

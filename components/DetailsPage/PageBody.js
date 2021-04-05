@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs';
-import MovieCast from './MovieCast';
-export default function MovieBody({cast}) {
+import Cast from './Cast';
+export default function PageBody({cast}) {
   return (
     <div css={{
       display: 'flex',
@@ -18,7 +18,7 @@ export default function MovieBody({cast}) {
           </StyledTabList>
           <TabPanels css={{marginTop: '2rem'}}>
             <TabPanel>
-              <MovieCast cast={cast} />
+              <Cast cast={cast} />
             </TabPanel>
             <TabPanel>
               Reviews
