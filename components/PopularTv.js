@@ -15,7 +15,7 @@ export default function PopularTv() {
         gap: '3rem',
       }}>
         {
-          popularTv?.map(tv => <DisplayCard key={tv.id} title={tv.title} id={tv.id} text={tv.overview} image={tv.poster} link="#" />)
+          popularTv?.map(tv => <DisplayCard key={tv.id} title={tv.title} id={tv.id} text={tv.overview} image={tv.poster} link={`/tv/${tv.id}`} />)
         }
       </div>
     </section>

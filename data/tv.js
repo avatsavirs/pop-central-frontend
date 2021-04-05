@@ -21,3 +21,38 @@ export async function getPopularTv() {
     return [];
   }
 }
+
+export async function getTvById(tvId) {
+  try {
+    const data = await request(gql`
+      query {
+        tv(tvId: ${tvId}) {
+          id
+          title 
+          overview
+          tagline
+          backdropImage
+          poster(imgSize: M)
+          rating
+          firstAirDate
+          creadedBy {
+            name
+          }
+          genres
+          credits {
+            artist {
+              id
+              name
+              photo(imgSize:M)
+            }
+            role
+          }
+        }
+      }
+    `);
+    return data.tv;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
