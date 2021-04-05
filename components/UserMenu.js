@@ -21,7 +21,7 @@ export default function UserMenu() {
 
 const StyledMenuButton = styled(MenuButton)({
   background:
-    "url(https://lh3.googleusercontent.com/ogw/ADGmqu_-_n4SCuPnCDVCjLGDkbqNENLLjdZiCOz3q19_=s48-c-mo)",
+    "none",
   width: "5rem",
   height: "5rem",
   borderRadius: "50%",
