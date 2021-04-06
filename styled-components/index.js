@@ -81,19 +81,7 @@ export const CardBody = styled.div({
 export const CardTitle = styled.div({
   lineHeight: '2.5rem',
   height: '5rem',
-  overflowY: 'hidden',
-  position: 'relative',
-  // ':after': {
-  //   content: "''",
-  //   position: 'absolute',
-  //   textAlign: 'right',
-  //   bottom: '0',
-  //   right: '0',
-  //   width: '30%',
-  //   height: '2.5rem',
-  //   background: 'var(--text-fade-color)',
-  //   transition: 'background 235ms ease-out'
-  // },
+  // overflowY: 'hidden', messes with the tabIndex on firefox
   'h1, h2, h3, h4, h5, h6': {
     height: '100%'
   }
