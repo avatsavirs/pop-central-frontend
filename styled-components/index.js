@@ -76,26 +76,15 @@ export const CardBody = styled.div({
   flexBasis: '40%',
   padding: '3rem',
   overflow: 'hidden',
+  display: 'flex',
+  flexDirection: 'column'
 })
 
 export const CardTitle = styled.div({
-  lineHeight: '2.5rem',
-  height: '5rem',
-  // overflowY: 'hidden', messes with the tabIndex on firefox
-  'h1, h2, h3, h4, h5, h6': {
-    height: '100%'
-  }
 });
 
 export const CardText = styled.div({
-  lineHeight: '2.2rem',
-  height: '22rem',
-  width: '100%',
-  overflow: 'hidden',
-  position: 'relative',
-  p: {
-    height: '100%'
-  },
+  flexGrow: '1'
 });
 
 export const CardLinks = styled.div({
