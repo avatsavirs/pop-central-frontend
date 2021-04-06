@@ -51,6 +51,7 @@ export async function getTvById(tvId) {
             id
             title
             poster(imgSize:M)
+            mediaType
           }
         }
       }

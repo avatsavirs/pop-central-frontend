@@ -52,6 +52,7 @@ export async function getMovieById(movieId) {
             id
             title
             poster(imgSize:M)
+            mediaType
           }
         }
       }
