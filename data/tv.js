@@ -47,6 +47,11 @@ export async function getTvById(tvId) {
             }
             role
           }
+          related {
+            id
+            title
+            poster(imgSize:M)
+          }
         }
       }
     `);

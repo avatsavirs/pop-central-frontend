@@ -53,7 +53,7 @@ export default function Movie({movieId}) {
         <Poster image={movie.poster} />
         <BannerContent title={movie.title} summary={movie.overview} releaseDate={movie.releaseDate} rating={movie.rating} directors={movie.directors} tagline={movie.tagline} genres={movie.genres} runtime={movie.runtime} />
       </Banner>
-      <PageBody cast={movie.credits} />
+      <PageBody cast={movie.credits} related={movie.related} />
     </div>
   )
 }

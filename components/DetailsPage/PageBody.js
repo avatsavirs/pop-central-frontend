@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
 import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs';
 import Cast from './Cast';
-export default function PageBody({cast}) {
+import Related from './Related';
+
+export default function PageBody({cast, related}) {
   return (
     <div css={{
       display: 'flex',
@@ -24,7 +26,7 @@ export default function PageBody({cast}) {
               Reviews
             </TabPanel>
             <TabPanel>
-              Related
+              <Related related={related} />
             </TabPanel>
           </TabPanels>
         </Tabs>

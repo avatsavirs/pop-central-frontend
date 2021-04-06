@@ -48,6 +48,11 @@ export async function getMovieById(movieId) {
             }
             role
           }
+          related {
+            id
+            title
+            poster(imgSize:M)
+          }
         }
       }
     `)
