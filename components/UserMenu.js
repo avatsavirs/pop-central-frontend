@@ -29,13 +29,10 @@ const StyledMenuButton = styled(MenuButton)({
   border: "none",
   overflow: "hidden",
   cursor: "pointer",
-  ":focus": {
+  ':focus, &[aria-expanded="true"]': {
     outline: 'none',
     boxShadow: "0 0 0 4px var(--outline-color)"
   },
-  '&[aria-expanded="true"]': {
-    boxShadow: "0 0 0 4px var(--outline-color)"
-  }
 });
 
 const StyledMenuList = styled(MenuList)({
