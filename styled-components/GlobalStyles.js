@@ -48,7 +48,7 @@ export default function GlobalStyles() {
           --border-color: var(--primary-dark);
           --shadow-color-regular: rgba(0, 0, 0, 0.2);
           --shadow-color-hover: rgba(0, 0, 0, 0.3);
-          --outline-color: #333;
+          --outline-color: var(--secondary);
           /* Containers */
           --content-width: 130rem;
           /* Typography */ 

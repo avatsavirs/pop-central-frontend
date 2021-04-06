@@ -109,8 +109,8 @@ export default function Person({personId}) {
                 cursor: 'pointer',
                 tabIndex: 0,
                 ":hover, :focus": {
-                  outline: '1px solid var(--success)',
-                  color: 'var(--success)'
+                  outline: '1px solid var(--outline-color)',
+                  color: 'var(--outline-color)'
                 }
               }}>
                 <Card key={credit.project.id} width="15rem" height="29rem">
