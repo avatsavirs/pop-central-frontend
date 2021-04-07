@@ -1,10 +1,11 @@
 import PopularMovies from 'components/PopularMovies';
-import {QueryClient, useQuery} from 'react-query';
+import {QueryClient} from 'react-query';
 import {dehydrate} from 'react-query/hydration';
 import {getPopularMovies} from 'data/movies'
 import {getPopularTv} from 'data/tv'
 import PopularTv from 'components/PopularTv';
 import Head from 'next/head'
+import SearchBar from 'components/SearchBar';
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ export default function Home() {
         flexBasis: 'var(--content-width)',
         padding: '3rem 0'
       }}>
+        <SearchBar/>
         <PopularMovies />
         <PopularTv />
       </div>
