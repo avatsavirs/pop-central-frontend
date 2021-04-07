@@ -4,7 +4,7 @@ import {CardImage} from 'styled-components';
 import {Card} from 'styled-components';
 
 export default function Cast({cast}) {
-  cast = cast.map(c => ({role: c.role, ...c.artist})).slice(0, 10);
+  cast = cast.map(c => ({role: c.role, ...c.person})).slice(0, 10);
   return (
     <div css={{
       display: 'flex',

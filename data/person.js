@@ -5,7 +5,7 @@ export async function getPersonById(personId) {
   try {
     const data = await request(gql`
       query {
-        person: artist(artistId: ${personId}) {
+        person(personId: ${personId}) {
           id
           name
           biography

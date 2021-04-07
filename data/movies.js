@@ -41,7 +41,7 @@ export async function getMovieById(movieId) {
           genres
           runtime
           credits {
-            artist {
+            person {
               id
               name
               photo(imgSize:M)

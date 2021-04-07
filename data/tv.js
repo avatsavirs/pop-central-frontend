@@ -40,7 +40,7 @@ export async function getTvById(tvId) {
           }
           genres
           credits {
-            artist {
+            person {
               id
               name
               photo(imgSize:M)
