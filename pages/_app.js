@@ -8,7 +8,14 @@ import GlobalStyles from 'styled-components/GlobalStyles'
 function MyApp({Component, pageProps}) {
   const queryClientRef = useRef();
   if (!queryClientRef.current) {
-    queryClientRef.current = new QueryClient();
+    queryClientRef.current = new QueryClient({
+      defaultOptions: {
+        queries: {
+          refetchOnWindowFocus: false,
+          retry: false
+        }
+      }
+    });
   }
   return (
     <QueryClientProvider client={queryClientRef.current}>
