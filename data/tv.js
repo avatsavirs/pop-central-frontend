@@ -23,8 +23,7 @@ export async function getPopularTv() {
 }
 
 export async function getTvById(tvId) {
-  try {
-    const data = await request(gql`
+  const data = await request(gql`
       query {
         tv(tvId: ${tvId}) {
           id
@@ -56,9 +55,5 @@ export async function getTvById(tvId) {
         }
       }
     `);
-    return data.tv;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
+  return data.tv;
 }

@@ -23,8 +23,7 @@ export async function getPopularMovies() {
 }
 
 export async function getMovieById(movieId) {
-  try {
-    const data = await request(gql`
+  const data = await request(gql`
       query {
         movie(movieId: ${movieId}) {
           id
@@ -57,9 +56,5 @@ export async function getMovieById(movieId) {
         }
       }
     `)
-    return data.movie;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
+  return data.movie;
 }

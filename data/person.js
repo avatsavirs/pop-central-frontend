@@ -2,8 +2,7 @@ import {gql} from 'graphql-request'
 import {request} from 'utils'
 
 export async function getPersonById(personId) {
-  try {
-    const data = await request(gql`
+  const data = await request(gql`
       query {
         person(personId: ${personId}) {
           id
@@ -36,9 +35,5 @@ export async function getPersonById(personId) {
         }
       }
     `)
-    return data.person;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
+  return data.person;
 }
