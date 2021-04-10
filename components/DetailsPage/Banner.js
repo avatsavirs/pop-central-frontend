@@ -13,7 +13,7 @@ export default function Banner({image, children}) {
       justifyContent: 'center',
     }}>
       <Overlay />
-      <Image src={image} layout="fill" objectFit="cover" quality={1} />
+      {image && <Image src={image} layout="fill" objectFit="cover" quality={1} />}
       <div css={{flexBasis: 'var(--content-width)', position: 'relative', display: 'flex', zIndex: 2}}>
         {children}
       </div>
