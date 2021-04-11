@@ -3,9 +3,10 @@ import {Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption} 
 import {gql} from 'graphql-request';
 import useDebounce from 'hooks/useDebounce';
 import {useRouter} from 'next/router';
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {useQuery} from 'react-query';
 import {request} from 'utils';
+import {XIcon, SearchIcon} from '@heroicons/react/solid'
 
 function useSearchItems(searchTerm) {
   const {data: searchResults, isLoading, isIdle, isError, isSuccess} = useQuery(['search', searchTerm], async () => {
@@ -43,6 +44,19 @@ export default function SearchBar() {
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
   const {searchResults, isLoading, isIdle, isSuccess, isError, error} = useSearchItems(debouncedSearchTerm);
   const router = useRouter();
+  const inputRef = useRef();
+
+  function focusOnSearchBar(event) {
+    if (event.keyCode === 191) {
+      if (document.activeElement === inputRef.current) return;
+      event.preventDefault();
+      inputRef.current.focus();
+    }
+  }
+  useEffect(() => {
+    document.addEventListener('keydown', focusOnSearchBar);
+    () => document.removeEventListener('keydown', focusOnSearchBar);
+  })
 
   function handleSelect(value) {
     setSearchTerm("");
@@ -61,10 +75,21 @@ export default function SearchBar() {
     router.push(url);
   }
 
+  function clear() {
+    setSearchTerm("");
+    inputRef.current.focus();
+  }
+
+
   return (
     <div>
       <Combobox css={{display: 'flex', justifyContent: 'center'}} openOnFocus onSelect={handleSelect}>
-        <StyledComboboxInput placeholder="Search" onChange={(event) => setSearchTerm(event.target.value)} aria-label="search bar" selectOnClick autocomplete={false} value={searchTerm} />
+        <div css={{width: '90%', display: 'flex', justifyContent: 'center', position: 'relative'}}>
+          <StyledComboboxInput placeholder="Search" onChange={(event) => setSearchTerm(event.target.value)} aria-label="search bar" autocomplete={false} value={searchTerm} ref={inputRef} />
+          {searchTerm && <button css={{position: 'absolute', right: '0', background: 'transparent', border: 'none', color: 'var(--primary-text)', cursor: 'pointer'}} onClick={clear}><XIcon css={{
+            width: '4rem', height: '4rem'
+          }} /></button>}
+        </div>
         <SearchResultList searchResults={searchResults} isLoading={isLoading} isIdle={isIdle} isSuccess={isSuccess} isError={isError} error={error} searchTerm={searchTerm} />
       </Combobox>
     </div>
@@ -79,10 +104,10 @@ function SearchResultList({searchResults, isLoading, isIdle, isSuccess, isError,
       return (
         <ComboboxPopover>
           <StyledComboboxList>
-            <StyledComboboxOption css={{color: 'var(--muted-text)', fontStyle: 'italic'}} value={`Search ${searchTerm} in movies...`} />
-            <StyledComboboxOption css={{color: 'var(--muted-text)', fontStyle: 'italic'}} value={`Search ${searchTerm} in tv...`} />
-            <StyledComboboxOption css={{color: 'var(--muted-text)', fontStyle: 'italic'}} value={`Search ${searchTerm} in persons...`} />
-            {searchResults.slice(0, 5).map(sr => <StyledComboboxOption key={sr.id} value={sr.id}>{sr.title}</StyledComboboxOption>)}
+            <StyledComboboxOption css={{color: 'var(--muted-text)', fontStyle: 'italic'}} value={'movies'}>Search {searchTerm} in movies... </StyledComboboxOption>
+            <StyledComboboxOption css={{color: 'var(--muted-text)', fontStyle: 'italic'}} value={'tv'}>Search {searchTerm} in tv... </StyledComboboxOption>
+            <StyledComboboxOption css={{color: 'var(--muted-text)', fontStyle: 'italic'}} value={'person'} >Search {searchTerm} in people...</StyledComboboxOption>
+            {searchResults.slice(0, 5).map(sr => <StyledComboboxOption key={sr.id} value={sr.id}><SearchIcon css={{width: '2rem', height: '2rem', marginRight: '1rem'}} />{sr.title}</StyledComboboxOption>)}
           </StyledComboboxList>
         </ComboboxPopover>
       )
@@ -102,7 +127,7 @@ function SearchResultList({searchResults, isLoading, isIdle, isSuccess, isError,
 }
 
 const StyledComboboxInput = styled(ComboboxInput)({
-  width: '90%',
+  width: '100%',
   background: 'transparent',
   border: 'none',
   color: 'var(--primary-text)',
@@ -121,8 +146,8 @@ const StyledComboboxList = styled(ComboboxList)({
 })
 
 const StyledComboboxOption = styled(ComboboxOption)({
-  textDecoration: 'none',
-  color: 'var(--primary-text)',
+  display: 'flex',
+  alignItems: 'center',
   fontSize: 'var(--h5)',
   cursor: 'pointer',
   background: 'var(--primary-background)',
