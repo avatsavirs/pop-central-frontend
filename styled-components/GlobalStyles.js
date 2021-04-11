@@ -5,6 +5,8 @@ export default function GlobalStyles() {
     <Global styles={
       css`
         * {
+          --reach-menu-button: 1;
+          --reach-combobox: 1;
           margin: 0;
           padding: 0;
           box-sizing: border-box;
