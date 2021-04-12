@@ -8,8 +8,10 @@ import {useQuery} from 'react-query';
 import {request} from 'utils';
 import {XIcon, SearchIcon} from '@heroicons/react/solid'
 
-function useSearchItems(searchTerm) {
-  const {data: searchResults, isLoading, isIdle, isError, isSuccess} = useQuery(['search', searchTerm], async () => {
+function useSearchItems(initialSearchTerm) {
+  const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const {data: searchResults, isLoading, isIdle, isError, isSuccess} = useQuery(['search', debouncedSearchTerm], async () => {
     const data = await request(gql`
         query {
           search(query: "${searchTerm}") {
@@ -36,16 +38,16 @@ function useSearchItems(searchTerm) {
   }, {
     enabled: !!searchTerm
   })
-  return {searchResults, isLoading, isIdle, isError, isSuccess};
+  return {searchResults, isLoading, isIdle, isError, isSuccess, searchTerm, setSearchTerm};
 }
 
 
 export default function SearchBar({initialSearchTerm = ""}) {
-  const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
-  const {searchResults, isLoading, isIdle, isSuccess, isError, error} = useSearchItems(debouncedSearchTerm);
+  const {searchTerm, setSearchTerm, searchResults, isLoading, isIdle, isSuccess, isError, error} = useSearchItems(initialSearchTerm);
   const router = useRouter();
-  const inputRef = useFocusOnKeyPress();
+  const inputRef = useRef();
+  useFocusOnKeyPress(inputRef);
+  const [isSelected, setIsSelected] = useState(false);
 
   function handleSelect(value) {
     if (value === "movies") {
@@ -77,26 +79,36 @@ export default function SearchBar({initialSearchTerm = ""}) {
         throw new Error(`Unhandled __typename ${__typename}`)
       }
     }
-    setSearchTerm("");
+    setIsSelected(true);
     router.push(url);
   }
+
+  useEffect(() => {
+    setIsSelected(false);
+  }, [searchResults, searchTerm])
 
   function clear() {
     setSearchTerm("");
     inputRef.current.focus();
   }
 
-
   return (
     <div>
       <Combobox css={{display: 'flex', justifyContent: 'center'}} openOnFocus onSelect={handleSelect}>
         <div css={{width: '90%', display: 'flex', justifyContent: 'center', position: 'relative'}}>
-          <StyledComboboxInput placeholder="Search" onChange={(event) => setSearchTerm(event.target.value)} aria-label="search bar" autocomplete={false} value={searchTerm} ref={inputRef} />
+          <StyledComboboxInput
+            placeholder="Search"
+            onChange={(event) => setSearchTerm(event.target.value)}
+            aria-label="search bar"
+            autocomplete={false}
+            value={searchTerm}
+            ref={inputRef}
+          />
           {searchTerm && <button css={{position: 'absolute', right: '0', background: 'transparent', border: 'none', color: 'var(--primary-text)', cursor: 'pointer'}} onClick={clear}><XIcon css={{
             width: '4rem', height: '4rem'
           }} /></button>}
         </div>
-        <SearchResultList searchResults={searchResults} isLoading={isLoading} isIdle={isIdle} isSuccess={isSuccess} isError={isError} error={error} searchTerm={searchTerm} />
+        {searchTerm && !isSelected && <SearchResultList searchResults={searchResults} isLoading={isLoading} isIdle={isIdle} isSuccess={isSuccess} isError={isError} error={error} searchTerm={searchTerm} />}
       </Combobox>
     </div>
   )
@@ -164,9 +176,8 @@ const StyledComboboxOption = styled(ComboboxOption)({
   }
 })
 
-function useFocusOnKeyPress() {
+function useFocusOnKeyPress(ref) {
 
-  const ref = useRef();
 
   function focusOnElement(event) {
     if (event.keyCode === 191) {
@@ -180,6 +191,4 @@ function useFocusOnKeyPress() {
     document.addEventListener('keydown', focusOnElement);
     () => document.removeEventListener('keydown', focusOnElement);
   }, [])
-
-  return ref;
 }
