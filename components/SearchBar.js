@@ -39,39 +39,45 @@ function useSearchItems(searchTerm) {
   return {searchResults, isLoading, isIdle, isError, isSuccess};
 }
 
-export default function SearchBar() {
-  const [searchTerm, setSearchTerm] = useState("");
+
+export default function SearchBar({initialSearchTerm = ""}) {
+  const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
   const {searchResults, isLoading, isIdle, isSuccess, isError, error} = useSearchItems(debouncedSearchTerm);
   const router = useRouter();
-  const inputRef = useRef();
-
-  function focusOnSearchBar(event) {
-    if (event.keyCode === 191) {
-      if (document.activeElement === inputRef.current) return;
-      event.preventDefault();
-      inputRef.current.focus();
-    }
-  }
-  useEffect(() => {
-    document.addEventListener('keydown', focusOnSearchBar);
-    () => document.removeEventListener('keydown', focusOnSearchBar);
-  })
+  const inputRef = useFocusOnKeyPress();
 
   function handleSelect(value) {
-    setSearchTerm("");
-    const id = value;
-    const movie = searchResults.find(movie => movie.id === id);
-    const {__typename} = movie;
-    if (__typename === "Movie") {
-      var url = `/movies/${id}`
-    } else if (__typename === "TV") {
-      var url = `/tv/${id}`
-    } else if (__typename === "Person") {
-      var url = `/person/${id}`
+    if (value === "movies") {
+      url = {
+        pathname: '/search',
+        query: {domain: 'movies', keyword: searchTerm}
+      }
+    } else if (value === "tv") {
+      url = {
+        pathname: '/search',
+        query: {domain: 'tv', keyword: searchTerm}
+      }
+    } else if (value === "person") {
+      url = {
+        pathname: '/search',
+        query: {domain: 'person', keyword: searchTerm}
+      }
     } else {
-      throw new Error(`Unhandled __typename ${__typename}`)
+      const id = value;
+      const movie = searchResults.find(movie => movie.id === id);
+      const {__typename} = movie;
+      if (__typename === "Movie") {
+        var url = `/movies/${id}`
+      } else if (__typename === "TV") {
+        var url = `/tv/${id}`
+      } else if (__typename === "Person") {
+        var url = `/person/${id}`
+      } else {
+        throw new Error(`Unhandled __typename ${__typename}`)
+      }
     }
+    setSearchTerm("");
     router.push(url);
   }
 
@@ -157,3 +163,23 @@ const StyledComboboxOption = styled(ComboboxOption)({
     background: 'var(--secondary-background)'
   }
 })
+
+function useFocusOnKeyPress() {
+
+  const ref = useRef();
+
+  function focusOnElement(event) {
+    if (event.keyCode === 191) {
+      if (document.activeElement === ref.current) return;
+      event.preventDefault();
+      ref.current?.focus();
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('keydown', focusOnElement);
+    () => document.removeEventListener('keydown', focusOnElement);
+  }, [])
+
+  return ref;
+}
