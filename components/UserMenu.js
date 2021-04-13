@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import {Menu, MenuList, MenuButton, MenuItem} from "@reach/menu-button";
 import Image from 'next/image';
 import useTheme from 'hooks/useTheme';
+import {MoonIcon, SunIcon} from '@heroicons/react/solid';
 
 export default function UserMenu() {
 
@@ -13,7 +14,7 @@ export default function UserMenu() {
       <StyledMenuList>
         <StyledMenuItem onSelect={() => {}}>Profile</StyledMenuItem>
         <StyledMenuItem onSelect={() => {}}>Logout</StyledMenuItem>
-        <StyledMenuItem onSelect={switchTheme}>Toggle Theme</StyledMenuItem>
+        <StyledMenuItem onSelect={switchTheme}>{theme === 'dark' ? <SunIcon css={{width: '3rem', height: '3rem'}} /> : <MoonIcon css={{width: '3rem', height: '3rem'}} />}</StyledMenuItem>
       </StyledMenuList>
     </Menu>
   )

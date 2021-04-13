@@ -1,3 +1,4 @@
+import {HeartIcon as HeartIconSolid, PlusIcon} from '@heroicons/react/solid'
 export default function BannerContent({title, summary, releaseDate, directors, rating, tagline, genres, runtime}) {
   const releaseYear = releaseDate.match(/^(\d{4})-/)[1];
   runtime = (Math.floor(runtime / 60)) + 'h ' + (runtime % 60) + 'min';
@@ -34,11 +35,12 @@ export default function BannerContent({title, summary, releaseDate, directors, r
       </ul>
       <div css={{
         display: 'flex',
-        gap: '3rem'
+        gap: '3rem',
+        alignItems: 'center'
       }}>
         <h4> 🌟   {rating} </h4>
-        <button> Like </button>
-        <button> Add to List </button>
+        <HeartIconSolid role="button" css={{cursor: 'pointer', width: '2.5rem', height: '2.5rem'}} aria-label="Like" />
+        <PlusIcon role="button" css={{width: '3.5rem', height: '3.5rem', cursor: 'pointer'}} />
       </div>
       <p css={{color: 'var(--muted-text)', fontStyle: 'italic'}}> {tagline} </p>
       <p> {summary} </p>
