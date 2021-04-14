@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import UserMenu from './UserMenu';
-import {signIn, useSession} from 'next-auth/client'
+import useAuth from 'hooks/useAuth'
 import {MoonIcon, SunIcon} from '@heroicons/react/solid';
 import useTheme from 'hooks/useTheme';
 
 export default function Nav() {
-  const [session, isLoading] = useSession();
+  // const [session, isLoading] = useSession();
+  const {signIn, isSessionLoading, isLoggedIn, user} = useAuth();
   const [theme, switchTheme] = useTheme();
-  console.debug({session});
   return (
     <nav css={{
       display: 'flex',
@@ -33,8 +33,12 @@ export default function Nav() {
       </Link>
       <div css={{display: 'flex', gap: '2rem', alignItems: 'center'}}>
         <button aria-label={theme === 'dark' ? 'light-theme' : 'dark-theme'} css={{background: 'transparent', color: 'var(--primary-color)', border: 'none', cursor: 'pointer'}} onClick={switchTheme}>{theme === 'dark' ? <SunIcon css={{width: '3rem', height: '3rem'}} /> : <MoonIcon css={{width: '3rem', height: '3rem'}} />}</button>
-        {isLoading ? <div css={{width: '50px'}} /> : (session === null ? <button onClick={() => signIn('google')}>Login</button> : <UserMenu user={session.user} />)}
+        {isSessionLoading ? <UserMenuPlaceholder /> : (isLoggedIn ? <UserMenu user={user} /> : <button onClick={() => signIn('google')}>Login</button>)}
       </div>
     </nav>
   )
+}
+
+function UserMenuPlaceholder() {
+  return <div css={{width: '50px'}} />;
 }
