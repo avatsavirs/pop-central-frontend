@@ -5,7 +5,6 @@ import {MoonIcon, SunIcon} from '@heroicons/react/solid';
 import useTheme from 'hooks/useTheme';
 
 export default function Nav() {
-  // const [session, isLoading] = useSession();
   const {signIn, isSessionLoading, isLoggedIn, user} = useAuth();
   const [theme, switchTheme] = useTheme();
   return (

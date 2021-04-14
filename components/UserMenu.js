@@ -1,12 +1,37 @@
 import styled from '@emotion/styled';
 import {Menu, MenuList, MenuButton, MenuItem} from "@reach/menu-button";
-import Image from 'next/image';
 import {signOut} from 'next-auth/client'
 
 export default function UserMenu({user}) {
   return (
     <Menu>
-      <StyledMenuButton aria-label="pop central account"><Image src={user.image} layout="fill" objectFit="cover" /></StyledMenuButton>
+      <StyledMenuButton aria-label="pop central account">
+        <div css={{
+          display: 'block',
+          overflow: 'hidden',
+          position: 'absolute',
+          boxSizing: 'border-box',
+          inset: '0px',
+          margin: '0px'
+        }}>
+          <img css={{
+            position: 'absolute',
+            inset: '0px',
+            boxSizing: 'border-box',
+            padding: '0px',
+            border: 'medium none',
+            margin: 'auto',
+            display: 'block',
+            width: '0px',
+            height: '0px',
+            minWidth: '100%',
+            maxWidth: '100%',
+            minHeight: '100%',
+            maxHeight: '100%',
+            objectFit: 'cover'
+          }} src={user.image} />
+        </div>
+      </StyledMenuButton>
       <StyledMenuList>
         <StyledMenuItem onSelect={() => {}}>Profile</StyledMenuItem>
         <StyledMenuItem onSelect={() => {signOut({redirect: false})}}>Logout</StyledMenuItem>
