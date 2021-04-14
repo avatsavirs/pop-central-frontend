@@ -1,20 +1,15 @@
 import styled from '@emotion/styled';
 import {Menu, MenuList, MenuButton, MenuItem} from "@reach/menu-button";
 import Image from 'next/image';
-import useTheme from 'hooks/useTheme';
-import {MoonIcon, SunIcon} from '@heroicons/react/solid';
+import {signOut} from 'next-auth/client'
 
-export default function UserMenu() {
-
-  const [theme, switchTheme] = useTheme();
-
+export default function UserMenu({user}) {
   return (
     <Menu>
-      <StyledMenuButton aria-label="pop central account"><Image src="/img/profile.png" layout="fill" objectFit="cover" /></StyledMenuButton>
+      <StyledMenuButton aria-label="pop central account"><Image src={user.image} layout="fill" objectFit="cover" /></StyledMenuButton>
       <StyledMenuList>
         <StyledMenuItem onSelect={() => {}}>Profile</StyledMenuItem>
-        <StyledMenuItem onSelect={() => {}}>Logout</StyledMenuItem>
-        <StyledMenuItem onSelect={switchTheme}>{theme === 'dark' ? <SunIcon css={{width: '3rem', height: '3rem'}} /> : <MoonIcon css={{width: '3rem', height: '3rem'}} />}</StyledMenuItem>
+        <StyledMenuItem onSelect={() => {signOut({redirect: false})}}>Logout</StyledMenuItem>
       </StyledMenuList>
     </Menu>
   )
