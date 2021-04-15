@@ -2,6 +2,7 @@ import {gql} from 'graphql-request';
 import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
 import {request} from 'utils';
+import jwt from 'jsonwebtoken';
 
 export default NextAuth({
   providers: [
@@ -19,12 +20,13 @@ export default NextAuth({
         email: user.email,
         image: user.image
       }
-      const {accessToken, dbUser} = await getAccessToken(providerUser);
+      const {accessToken, dbUser, refreshToken} = await getAccessToken(providerUser);
       user.accessToken = accessToken;
       user.dbUser = dbUser;
+      user.refreshToken = refreshToken;
       return true;
     },
-    jwt(token, user) {
+    async jwt(token, user) {
       // jwt callback is called every time session is accessed. 
       // However user object is set only on signIn
       // It is undefined on subsequent calls.
@@ -32,12 +34,23 @@ export default NextAuth({
       if (user) {
         token.accessToken = user.accessToken;
         token.dbUser = user.dbUser;
+        token.refreshToken = user.refreshToken;
+      } else {
+        const decodedAccessToken = jwt.decode(token.accessToken);
+        const accessTokenExpTime = decodedAccessToken?.exp * 1000;
+        const currentTime = Date.now();
+        if (currentTime >= accessTokenExpTime) {
+          const {newAccessToken, newRefreshToken} = await getRefreshedTokens(token.accessToken, token.refreshToken);
+          token.accessToken = newAccessToken;
+          token.refreshToken = newRefreshToken;
+        }
       }
       return token;
     },
     session(session, token) {
       session.accessToken = token.accessToken;
       session.dbUser = token.dbUser;
+      session.refreshToken = token.refreshToken;
       return session;
     }
   }
@@ -55,11 +68,26 @@ async function getAccessToken(user) {
         email
       }
       accessToken
+      refreshToken
     }
   }
   `;
 
   const {signIn: signInResponse} = await request(SIGN_IN, {input: user});
-  // return signInResponse.accessToken;
-  return {accessToken: signInResponse.accessToken, dbUser: signInResponse.user}
+  return {accessToken: signInResponse.accessToken, dbUser: signInResponse.user, refreshToken: signInResponse.refreshToken}
+}
+
+async function getRefreshedTokens(accessToken, refreshToken) {
+  const REFRESH_TOKENS = gql`
+    mutation getRefreshTokens($accessToken: String!, $refreshToken: String!) {
+      refreshTokens(accessToken:$accessToken, refreshToken: $refreshToken) {
+        code
+        message
+        accessToken
+        refreshToken
+      }
+    }
+  `;
+  const {refreshTokens: {accessToken: newAccessToken, refreshToken: newRefreshToken}} = await request(REFRESH_TOKENS, {accessToken, refreshToken});
+  return {newAccessToken, newRefreshToken};
 }
