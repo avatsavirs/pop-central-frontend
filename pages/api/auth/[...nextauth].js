@@ -88,6 +88,12 @@ async function getRefreshedTokens(accessToken, refreshToken) {
       }
     }
   `;
-  const {refreshTokens: {accessToken: newAccessToken, refreshToken: newRefreshToken}} = await request(REFRESH_TOKENS, {accessToken, refreshToken});
-  return {newAccessToken, newRefreshToken};
+  try {
+    console.debug('refreshing tokens');
+    const {refreshTokens: {accessToken: newAccessToken, refreshToken: newRefreshToken}} = await request(REFRESH_TOKENS, {accessToken, refreshToken});
+    return {newAccessToken, newRefreshToken};
+  } catch (error) {
+    console.error({error});
+    return null;
+  }
 }
