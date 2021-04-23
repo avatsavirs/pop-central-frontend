@@ -1,17 +1,23 @@
 import {useSession, signIn, signOut} from 'next-auth/client'
-import {useEffect} from 'react';
 
 export default function useAuth() {
   const [session, isSessionLoading] = useSession();
-  const accessToken = session?.accessToken;
-  const refreshToken = session?.refreshToken;
-  const isLoggedIn = Boolean(session) && accessToken && refreshToken;
-  const isLoggedOut = !isLoggedIn;
-  const user = session ? session.dbUser : null;
-  useEffect(() => {
-    if (session && (!accessToken || !refreshToken)) {
-      signOut();
-    }
-  }, [session]);
+  if (session) {
+    var accessToken = session.accessToken;
+    var refreshToken = session.refreshToken;
+  } else {
+    var accessToken = undefined;
+    var refreshToken = undefined;
+  }
+  if (accessToken && refreshToken) {
+    var isLoggedIn = true;
+    var isLoggedOut = !isLoggedIn;
+    var user = session.dbUser;
+  } else {
+    if (session) signOut();
+    var isLoggedIn = false;
+    var isLoggedOut = true;
+    var user = null;
+  }
   return {user, accessToken, isLoggedIn, isLoggedOut, user, isSessionLoading, signIn, signOut, refreshToken};
 }
