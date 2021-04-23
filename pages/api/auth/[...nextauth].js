@@ -20,30 +20,22 @@ export default NextAuth({
         email: user.email,
         image: user.image
       }
-      const {accessToken, dbUser, refreshToken} = await getAccessToken(providerUser);
+      const {accessToken, dbUser, refreshToken} = await signup(providerUser);
       user.accessToken = accessToken;
       user.dbUser = dbUser;
       user.refreshToken = refreshToken;
       return true;
     },
     async jwt(token, user) {
-      // jwt callback is called every time session is accessed. 
-      // However user object is set only on signIn
-      // It is undefined on subsequent calls.
-      // We want to set the accessToken only on signIn
       if (user) {
         token.accessToken = user.accessToken;
         token.dbUser = user.dbUser;
         token.refreshToken = user.refreshToken;
-      } else {
-        const decodedAccessToken = jwt.decode(token.accessToken);
-        const accessTokenExpTime = decodedAccessToken?.exp * 1000;
-        const currentTime = Date.now();
-        if (currentTime >= accessTokenExpTime) {
-          const {newAccessToken, newRefreshToken} = await getRefreshedTokens(token.accessToken, token.refreshToken);
-          token.accessToken = newAccessToken;
-          token.refreshToken = newRefreshToken;
-        }
+      } else if (isAccessTokenExpired(token.accessToken)) {
+        const {newAccessToken, newRefreshToken} = await refreshAccessToken(token.accessToken, token.refreshToken);
+        // console.debug({newAccessToken});
+        token.accessToken = newAccessToken;
+        token.refreshToken = newRefreshToken;
       }
       return token;
     },
@@ -51,13 +43,20 @@ export default NextAuth({
       session.accessToken = token.accessToken;
       session.dbUser = token.dbUser;
       session.refreshToken = token.refreshToken;
+      // console.debug({'session.accessToken': session.accessToken})
       return session;
     }
   }
 })
 
-async function getAccessToken(user) {
+function isAccessTokenExpired(accessToken) {
+  const decodedAccessToken = jwt.decode(accessToken);
+  const accessTokenExpTime = decodedAccessToken?.exp * 1000;
+  const currentTime = Date.now();
+  return currentTime >= accessTokenExpTime;
+}
 
+async function signup(user) {
   const SIGN_IN = gql`
   mutation createUser($input: SigninInput!) {
     signIn(user: $input) {
@@ -77,7 +76,7 @@ async function getAccessToken(user) {
   return {accessToken: signInResponse.accessToken, dbUser: signInResponse.user, refreshToken: signInResponse.refreshToken}
 }
 
-async function getRefreshedTokens(accessToken, refreshToken) {
+async function refreshAccessToken(accessToken, refreshToken) {
   const REFRESH_TOKENS = gql`
     mutation getRefreshTokens($accessToken: String!, $refreshToken: String!) {
       refreshTokens(accessToken:$accessToken, refreshToken: $refreshToken) {
@@ -89,7 +88,6 @@ async function getRefreshedTokens(accessToken, refreshToken) {
     }
   `;
   try {
-    console.debug('refreshing tokens');
     const {refreshTokens: {accessToken: newAccessToken, refreshToken: newRefreshToken}} = await request(REFRESH_TOKENS, {accessToken, refreshToken});
     return {newAccessToken, newRefreshToken};
   } catch (error) {
