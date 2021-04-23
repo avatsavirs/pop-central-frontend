@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import {Menu, MenuList, MenuButton, MenuItem} from "@reach/menu-button";
 import {signOut} from 'next-auth/client'
+import Link from 'next/link';
 
 export default function UserMenu({user}) {
   return (
@@ -33,8 +34,8 @@ export default function UserMenu({user}) {
         </div>
       </StyledMenuButton>
       <StyledMenuList>
-        <StyledMenuItem onSelect={() => {}}>Profile</StyledMenuItem>
-        <StyledMenuItem onSelect={() => {signOut({redirect: false})}}>Logout</StyledMenuItem>
+        <Link href="/profile"><a css={{textDecoration: 'none', color: 'var(--primary-text)'}}><StyledMenuItem onSelect={() => {}}>Profile</StyledMenuItem></a></Link>
+        <StyledMenuItem onSelect={() => {signOut()}}>Logout</StyledMenuItem>
       </StyledMenuList>
     </Menu>
   )
