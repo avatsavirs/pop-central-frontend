@@ -13,6 +13,10 @@ export default function GlobalStyles() {
           box-sizing: border-box;
         }
 
+        .slider-item {
+          padding: 0 1rem;
+        }
+
         :root {
           font-size: 10px;
           /* Colors */

@@ -5,6 +5,7 @@ import {dehydrate} from 'react-query/hydration';
 import {authRequest} from 'utils';
 import {getSession} from 'next-auth/client'
 import Head from 'next/head';
+import ListSlider from 'components/ListSlider';
 
 const LISTS = gql`
   query {
@@ -43,40 +44,36 @@ export async function getServerSideProps(ctx) {
 
 export default function Profile() {
   const {isSessionLoading, accessToken, refreshToken, user} = useAuth();
-  const {data: lists, error, isLoading, isError, isSuccess, isStale} = useQuery('lists', async () => {
+  const {data: lists, error, isLoading, isError, isIdle, isSuccess, isStale} = useQuery('lists', async () => {
     const response = await authRequest(LISTS, null, accessToken, refreshToken)
     return response.lists;
   }, {enabled: !isSessionLoading});
-  if (isLoading) {
+  if (isLoading || isIdle) {
     return <div>Loading...</div>
   }
   if (isError) {
     return <div role="error">{error.message}</div>
   }
-  return (
-    <>
-      <Head><title>{user.name} | Pop Central</title></Head>
-      <div css={{
-        flexBasis: 'var(--content-width)',
-      }}>
-        <h3>Lists</h3>
-        <div>
+  if (isSuccess) {
+    return (
+      <>
+        <Head><title>{user.name} | Pop Central</title></Head>
+        <div css={{
+          width: 'var(--content-width)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '5rem',
+        }}>
           {
             lists.map(list => (
               <div key={list.id}>
-                <p>{list.title}</p>
-                <ul>
-                  {
-                    list.listItems.map(listItem => (
-                      listItem.title
-                    ))
-                  }
-                </ul>
+                <h3>{list.title}</h3>
+                <ListSlider data={list.listItems} />
               </div>
             ))
           }
         </div>
-      </div>
-    </>
-  )
+      </>
+    )
+  }
 }
