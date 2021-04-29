@@ -1,15 +1,16 @@
 import {Card} from 'styled-components';
-import {StyledLink, CardImage} from 'styled-components';
+import {CardImage} from 'styled-components';
 import Image from 'next/image';
 import {CardBody} from 'styled-components';
-import {CardLinks} from 'styled-components';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {DotsVerticalIcon} from '@heroicons/react/solid'
 import styled from '@emotion/styled';
 import {Menu, MenuButton, MenuItem, MenuList} from '@reach/menu-button';
+import {useState} from 'react';
+import AddToListModal from './AddToListModal';
 
-export default function DisplayCard({title, image, text, link}) {
+export default function DisplayCard({title, image, text, link, externalId, mediaType}) {
   const router = useRouter();
   function navigateToDetailsPage(event) {
     if (event.target !== event.currentTarget) return;
@@ -28,31 +29,35 @@ export default function DisplayCard({title, image, text, link}) {
         css={{cursor: 'pointer'}}
         onClick={navigateToDetailsPage}>
         <CardTitle link={link} title={title} />
-        <CardMenu />
+        <CardMenu itemData={{title, image, externalId, mediaType}} />
         <CardText link={link} text={text} />
       </CardBody>
     </Card>
   )
 }
 
-function CardMenu() {
+function CardMenu({itemData}) {
+  const [openDialog, setOpenDialog] = useState(false);
   return (
-    <Menu>
-      <StyledMenuButton>
-        <DotsVerticalIcon css={{
-          width: '3rem',
-          height: '3rem',
-        }} />
-      </StyledMenuButton>
-      <StyledMenuList>
-        <StyledMenuItem onSelect={() => {}}>
-          Add to List
+    <>
+      <Menu>
+        <StyledMenuButton>
+          <DotsVerticalIcon css={{
+            width: '3rem',
+            height: '3rem',
+          }} />
+        </StyledMenuButton>
+        <StyledMenuList>
+          <StyledMenuItem onSelect={() => {setOpenDialog(true)}}>
+            Add to List
         </StyledMenuItem>
-        <StyledMenuItem onSelect={() => {}}>
-          Like
+          <StyledMenuItem onSelect={() => {}}>
+            Like
         </StyledMenuItem>
-      </StyledMenuList>
-    </Menu>
+        </StyledMenuList>
+      </Menu>
+      <AddToListModal open={openDialog} setOpen={setOpenDialog} itemData={itemData} />
+    </>
   )
 }
 
@@ -98,3 +103,4 @@ const StyledMenuItem = styled(MenuItem)({
     background: "var(--secondary-background)"
   }
 })
+

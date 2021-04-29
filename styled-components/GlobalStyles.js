@@ -7,6 +7,7 @@ export default function GlobalStyles() {
         * {
           --reach-menu-button: 1;
           --reach-combobox: 1;
+          --reach-dialog: 1;
           margin: 0;
           padding: 0;
           box-sizing: border-box;
@@ -136,6 +137,16 @@ export default function GlobalStyles() {
           display: flex;
           flex-direction: column;
           min-height: 100vh;
+        }
+
+        [data-reach-dialog-overlay] {
+          background: hsla(0, 0%, 0%, 0.33);
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          overflow: auto;
         }
       `
     } />

@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.1.5",
     "@heroicons/react": "^1.0.0",
     "@reach/combobox": "^0.14.0",
+    "@reach/dialog": "^0.15.0",
     "@reach/menu-button": "^0.14.0",
     "@reach/tabs": "^0.14.0",
     "graphql": "^15.5.0",
