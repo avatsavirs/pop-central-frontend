@@ -61,7 +61,7 @@ export default function Tv({tvId}) {
         <Head> <title> {tv.title} | Pop Central </title> </Head>
         <Banner image={tv.backdropImage}>
           <Poster image={tv.poster} />
-          <BannerContent title={tv.title} summary={tv.overview} releaseDate={tv.firstAirDate} rating={tv.rating} directors={tv.creadedBy} tagline={tv.tagline} genres={tv.genres} runtime={tv.runtime} />
+          <BannerContent title={tv.title} summary={tv.overview} releaseDate={tv.firstAirDate} rating={tv.rating} directors={tv.creadedBy} tagline={tv.tagline} genres={tv.genres} runtime={tv.runtime} mediaType="tv" externalId={tv.id} image={tv.poster} />
         </Banner>
         <PageBody cast={tv.credits} related={tv.related} />
       </div>

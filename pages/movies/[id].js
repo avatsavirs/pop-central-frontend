@@ -56,7 +56,7 @@ export default function Movie({movieId}) {
         <Head> <title> {movie.title} | Pop Central </title> </Head>
         <Banner image={movie.backdropImage}>
           <Poster image={movie.poster} />
-          <BannerContent title={movie.title} summary={movie.overview} releaseDate={movie.releaseDate} rating={movie.rating} directors={movie.directors} tagline={movie.tagline} genres={movie.genres} runtime={movie.runtime} />
+          <BannerContent title={movie.title} summary={movie.overview} releaseDate={movie.releaseDate} rating={movie.rating} directors={movie.directors} tagline={movie.tagline} genres={movie.genres} runtime={movie.runtime} mediaType="movies" externalId={movie.id} image={movie.poster} />
         </Banner>
         <PageBody cast={movie.credits} related={movie.related} />
       </div>

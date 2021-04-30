@@ -144,13 +144,15 @@ export default function GlobalStyles() {
         }
 
         [data-reach-dialog-overlay] {
-          background: hsla(0, 0%, 0%, 0.33);
+          background: hsla(0, 0%, 0%, 0.53);
+          backdrop-filter: blur(6px);
           position: fixed;
           top: 0;
           right: 0;
           bottom: 0;
           left: 0;
           overflow: auto;
+          z-index: 2;
         }
       `
     } />
