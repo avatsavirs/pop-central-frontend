@@ -6,17 +6,17 @@ import "react-multi-carousel/lib/styles.css";
 export default function ListSlider({data}) {
   const responsive = {
     desktop: {
-      breakpoint: {max: 3000, min: 1024},
+      breakpoint: {max: 3000, min: 1300},
       items: 5,
       paritialVisibilityGutter: 60
     },
     tablet: {
-      breakpoint: {max: 1024, min: 464},
-      items: 2,
+      breakpoint: {max: 1300, min: 375},
+      items: 3,
       paritialVisibilityGutter: 50
     },
     mobile: {
-      breakpoint: {max: 464, min: 0},
+      breakpoint: {max: 375, min: 0},
       items: 1,
       paritialVisibilityGutter: 30
     }
@@ -27,7 +27,13 @@ export default function ListSlider({data}) {
       deviceType={"desktop"}
       responsive={responsive}
       itemClass="slider-item"
-      css={{width: '100%'}}
+      css={{
+        width: '100%',
+        '@media(max-width: 375px)': {
+          width: '80%',
+          margin: '0 auto'
+        }
+      }}
     >
       {data.map(item => {
         return (
@@ -36,7 +42,7 @@ export default function ListSlider({data}) {
               <div css={{
                 backgroundColor: 'white',
                 color: 'black',
-                height: '33rem',
+                height: '35rem',
                 position: 'relative',
                 ':hover': {
                   div: {
@@ -47,7 +53,7 @@ export default function ListSlider({data}) {
                   }
                 }
               }} >
-                <Image css={{transition: 'transform 0.3s ease-in-out'}} src={item.image} layout="fill" />
+                <Image css={{transition: 'transform 0.3s ease-in-out'}} src={item.image} layout="fill" objectFit="cover" />
                 <div css={{
                   zIndex: 100,
                   position: 'absolute',

@@ -76,6 +76,7 @@ export default function Profile() {
           display: 'flex',
           flexDirection: 'column',
           gap: '5rem',
+          overflowX: 'hidden',
         }}>
           {
             lists.map(list => (
