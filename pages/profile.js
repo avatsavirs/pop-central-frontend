@@ -82,7 +82,7 @@ export default function Profile() {
             lists.map(list => (
               <div key={list.id} css={{
                 ':hover': {
-                  button: {
+                  '& > div > button': {
                     opacity: 1
                   }
                 }
@@ -96,13 +96,16 @@ export default function Profile() {
                     opacity: '0',
                     cursor: 'pointer',
                     transition: 'opacity 0.1s ease-in-out, color 0.1s ease-in-out',
-                    ':hover': {
+                    ':hover, :focus': {
                       color: 'red'
+                    },
+                    ':focus': {
+                      opacity: 1
                     }
                   }}
                     onClick={() => {deleteList({listId: list.id})}}><TrashIcon width='2rem' height='2rem' /></button>
                 </div>
-                {list.listItems.length > 0 ? <ListSlider data={list.listItems} /> : <small>No Items in this list</small>}
+                {list.listItems.length > 0 ? <ListSlider data={list.listItems} listId={list.id} /> : <small>No Items in this list</small>}
               </div>
             ))
           }
